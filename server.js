@@ -1,6 +1,8 @@
+// External libraries
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
 
 // Models
 const users = require('./routes/api/users');
