@@ -1,3 +1,5 @@
+// Returns true if the passed value is
+// undefined || null || empty object || '' string
 const isEmpty = (value) => (
     value === undefined ||
     value === null ||
