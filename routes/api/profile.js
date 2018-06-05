@@ -21,7 +21,8 @@ router.get('/test', (req, res) => res.json({msg: 'profile works'}));
 // @route    GET api/profile
 // @desc     Get current user's profile
 // @access   Private
-router.get('/', 
+router.get(
+    '/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         const errors = {}
@@ -43,7 +44,9 @@ router.get('/',
 // @route    GET api/profile/user/:user_id
 // @desc     Get profile by user id
 // @access   Public
-router.get('/user/:user_id', (req, res) => {
+router.get(
+    '/user/:user_id', 
+    (req, res) => {
     const errors = {}
     Profile.findOne({ user: req.params.user_id })
         .populate('user', ['name', 'avatar'])
@@ -61,7 +64,9 @@ router.get('/user/:user_id', (req, res) => {
 // @route    GET api/profile/all
 // @desc     Get all profiles
 // @access   Public
-router.get('/all', (req, res) => {
+router.get(
+    '/all', 
+    (req, res) => {
     const errors = {}
     Profile.find()
         .populate('user', ['name', 'avatar'])
@@ -78,7 +83,8 @@ router.get('/all', (req, res) => {
 // @route    POST api/profile/experience
 // @desc     Add experience to profile
 // @access   Private
-router.post('/experience', 
+router.post(
+    '/experience', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         const { errors, isValid } = validateExperienceInput(req.body)
@@ -107,7 +113,8 @@ router.post('/experience',
 // @route    POST api/profile/education
 // @desc     Add education to profile
 // @access   Private
-router.post('/education', 
+router.post(
+    '/education', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         const { errors, isValid } = validateEducationInput(req.body)
@@ -137,7 +144,9 @@ router.post('/education',
 // @route    GET api/profile/handle/:handle
 // @desc     Get profile by handle
 // @access   Public
-router.get('/handle/:handle', (req, res) => {
+router.get(
+    '/handle/:handle', 
+    (req, res) => {
     const errors = {}
     Profile.findOne({ handle: req.params.handle })
         .populate('user', ['name', 'avatar'])
@@ -156,7 +165,8 @@ router.get('/handle/:handle', (req, res) => {
 // @route    POST api/profile
 // @desc     Create or edit user profile
 // @access   Private
-router.post('/', 
+router.post(
+    '/', 
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         // Validate request body and store errors (if any)
@@ -211,11 +221,77 @@ router.post('/',
                             new Profile(profileFields)
                                 .save()
                                 .then(profile => res.json(profile));
-
                         });
                 }
             });
 });
 
+// @route    DEL api/profile/experience/:exp_id
+// @desc     delete experience from profile
+// @access   Private
+router.delete(
+    '/experience/:exp_id', 
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Profile.findOne({ user: req.user.id })
+            .then(profile => {
+                // map over experience array to grab ids
+                // store the one that matches with req param id
+                const removeIndex = profile.experience
+                    .map(item => item.id)
+                    .indexOf(req.params.exp_id)
+                
+                // splice out the experience with index found above
+                profile.experience.splice(removeIndex, 1)
+
+                // save the changes to the profile, then send it back
+                profile.save().then(profile => res.json(profile))
+            })
+            .catch(err => res.status(404).json(err));
+        }
+);
+
+// @route    DEL api/profile/education/:edu_id
+// @desc     delete education from profile
+// @access   Private
+router.delete(
+    '/education/:edu_id', 
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Profile.findOne({ user: req.user.id })
+            .then(profile => {
+                // map over experience array to grab ids
+                // store the one that matches with req param id
+                const removeIndex = profile.experience
+                    .map(item => item.id)
+                    .indexOf(req.params.edu_id)
+                
+                // splice out the experience with index found above
+                profile.experience.splice(removeIndex, 1)
+
+                // save the changes to the profile, then send it back
+                profile.save().then(profile => res.json(profile))
+            })
+            .catch(err => res.status(404).json(err));
+        }
+);
+
+// @route    DEL api/profile
+// @desc     delete user and profile
+// @access   Private
+router.delete(
+    '/', 
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Profile.findOneAndRemove({ user: req.user.id })
+            .then(() => {
+                User.findOneAndRemove({ _id : req.user.id })
+            })
+            .then(() => {
+                res.json({ success: true })
+            })
+            .catch(err => res.status(404).json(err));
+        }
+);
 
 module.exports = router;
