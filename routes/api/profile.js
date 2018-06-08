@@ -108,6 +108,7 @@ router.post(
                 profile.experience.unshift(newExp);
                 profile.save().then(profile => res.json(profile))
             })
+            .catch(err => res.status(404).json({error: 'cannot find profile', system: err}));
     });
 
 // @route    POST api/profile/education
@@ -138,6 +139,7 @@ router.post(
                 profile.education.unshift(newEdu);
                 profile.save().then(profile => res.json(profile))
             })
+            .catch(err => console.log(err));
     });
 
 
@@ -223,7 +225,8 @@ router.post(
                                 .then(profile => res.json(profile));
                         });
                 }
-            });
+            }) 
+            .catch(err => res.status(404).json({error: 'No profile found for that user', system: err}));
 });
 
 // @route    DEL api/profile/experience/:exp_id
