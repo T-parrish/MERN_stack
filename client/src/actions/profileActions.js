@@ -64,3 +64,16 @@ export const deleteProfile = () => dispatch => {
       );
   }
 }
+
+// Add experience to profile
+export const addExperience = (experienceData, history) => dispatch => {
+  axios
+    .post('/api/experience', experienceData)
+    .then(res => history.push('/dashboard'))
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
