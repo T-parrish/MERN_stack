@@ -13,7 +13,7 @@ module.exports = function validateExperienceInput(data) {
 
     // Checks to make sure that the field isn't empty
     if(Validator.isEmpty(data.title)) {
-        errors.password = 'Job title is required';
+        errors.title = 'Job title is required';
     }
 
     if(Validator.isEmpty(data.company)) {

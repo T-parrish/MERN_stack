@@ -23,24 +23,24 @@ class AddExperience extends Component {
       disabled: false
     }
 
-    this.onChange = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
-    this.onCheck = this.onCheck.bind(this)
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onCheck = this.onCheck.bind(this);
   }
 
-  onChange = (e) => {
+  onChange(e) {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  onCheck = (e) => {
+  onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
     });
   }
 
-  onSubmit = (e) => {
-    e.prevent.default();
+  onSubmit(e) {
+    e.preventDefault();
 
     const experienceData = {
       company: this.state.company,
@@ -55,6 +55,13 @@ class AddExperience extends Component {
     this.props.addExperience(experienceData, this.props.history)
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.errors) {
+      this.setState({errors: nextProps.errors})
+    }
+  }
+
+
   render() {
     const { errors } = this.state;
 
@@ -67,7 +74,7 @@ class AddExperience extends Component {
               <h1 className="display-4 text-center"> add experience </h1>
               <p className="lead text-center">add any job or position</p>
               <small className="d-block pb-3"> * indicates required</small>
-              <form onSubmit={this.onsubmit}>
+              <form onSubmit={this.onSubmit}>
                 <TextFieldGroup 
                   placeholder='* Company'
                   name='company'
@@ -83,7 +90,7 @@ class AddExperience extends Component {
                   error={errors.title}
                 />
                 <TextFieldGroup 
-                  placeholder='* Location'
+                  placeholder='Location'
                   name='location'
                   value={this.state.location}
                   onChange={this.onChange}
@@ -129,8 +136,8 @@ class AddExperience extends Component {
                   info="tell us about this job"
                 />
                 <input 
-                  type="submit" 
-                  value='submit' 
+                  type='submit'
+                  value='Submit' 
                   className="btn btn-info btn-block mt-4"
                 />
               </form>
