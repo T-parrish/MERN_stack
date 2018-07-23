@@ -265,12 +265,12 @@ router.delete(
             .then(profile => {
                 // map over experience array to grab ids
                 // store the one that matches with req param id
-                const removeIndex = profile.experience
+                const removeIndex = profile.education
                     .map(item => item.id)
                     .indexOf(req.params.edu_id)
                 
                 // splice out the experience with index found above
-                profile.experience.splice(removeIndex, 1)
+                profile.education.splice(removeIndex, 1)
 
                 // save the changes to the profile, then send it back
                 profile.save().then(profile => res.json(profile))
