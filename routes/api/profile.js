@@ -12,6 +12,7 @@ const User = require('../../models/User');
 const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
+const removeProtocol = require('../../validation/social');
 
 // @route    GET api/profile/test
 // @desc     Tests POST route
@@ -143,11 +144,11 @@ router.post(
     });
 
 
-// @route    GET api/profile/handle/:handle
+// @route    GET api/profile/:handle
 // @desc     Get profile by handle
 // @access   Public
 router.get(
-    '/handle/:handle', 
+    '/:handle', 
     (req, res) => {
     const errors = {}
     Profile.findOne({ handle: req.params.handle })
@@ -196,12 +197,13 @@ router.post(
         }
 
         // Social - need to initialize first since it's an object within an object
+        // remove protocol from string to allow for more downstream flexibility + security
         profileFields.social = {};
-        if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-        if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-        if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-        if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-        if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+        if (req.body.youtube) profileFields.social.youtube = removeProtocol(req.body.youtube);
+        if (req.body.twitter) profileFields.social.twitter = removeProtocol(req.body.twitter);
+        if (req.body.facebook) profileFields.social.facebook = removeProtocol(req.body.facebook);
+        if (req.body.linkedin) profileFields.social.linkedin = removeProtocol(req.body.linkedin);
+        if (req.body.instagram) profileFields.social.instagram = removeProtocol(req.body.instagram);
 
         Profile.findOne({ user : req.user.id })
             .then(profile => {

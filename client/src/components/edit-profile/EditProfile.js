@@ -74,11 +74,11 @@ class EditProfile extends Component {
         skills: skillsCsv,
         githubusername: profile.githubusername,
         bio: profile.bio,
-        facebook: profile.facebook,
-        twitter: profile.twitter,
-        youtube: profile.youtube,
-        instagram: profile.instagram,
-        linkedin: profile.linkedin
+        facebook: profile.social.facebook,
+        twitter: profile.social.twitter,
+        youtube: profile.social.youtube,
+        instagram: profile.social.instagram,
+        linkedin: profile.social.linkedin
       })
     }
   }
