@@ -71,8 +71,8 @@ class AddEducation extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">go back</Link>
-              <h1 className="display-4 text-center"> add experience </h1>
-              <p className="lead text-center">add any job or position</p>
+              <h1 className="display-4 text-center"> add education </h1>
+              <p className="lead text-center">add any education or certification</p>
               <small className="d-block pb-3"> * indicates required</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup 
@@ -124,7 +124,7 @@ class AddEducation extends Component {
                     id='current'
                   />
                   <label htmlFor="current" className="form-check-label">
-                    Current Job
+                    Currently Attending
                   </label>
                 </div> 
                 <TextAreaFieldGroup
@@ -133,7 +133,7 @@ class AddEducation extends Component {
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
-                  info="tell us about this job"
+                  info="tell us about the program"
                 />
                 <input 
                   type='submit'
