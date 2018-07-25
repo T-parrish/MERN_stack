@@ -157,8 +157,9 @@ router.get(
             if(!profile) {
                 errors.noprofile = 'There is no profile for this user'
                 res.status(404).json(errors)
+            } else {
+                res.json(profile)
             }
-            res.json(profile)
         })
         .catch(err => res.status(404).json(err));
 });
