@@ -43,7 +43,7 @@ class ProfileHeader extends Component {
               </p>
               <p>
                 <a 
-                  href={profile.website} 
+                  href={`https://${profile.website}`} 
                   target="_blank" 
                   className="text-white p-2"
                   rel="noopener noreferrer"
@@ -55,8 +55,6 @@ class ProfileHeader extends Component {
             </div>
           </div>
         </div>
-
-        <h1>Profile GitHub</h1>
       </div>
     )
   }
