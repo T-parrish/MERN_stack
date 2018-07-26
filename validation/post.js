@@ -15,7 +15,7 @@ module.exports = function validatePostInput(data) {
 
     // Checks to make sure that the field isn't empty
     if(Validator.isEmpty(data.text)) {
-        errors.text = 'Password field is required';
+        errors.text = 'Text Field is Required';
     };
 
     return {
