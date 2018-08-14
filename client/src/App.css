@@ -1,3 +1,16 @@
+html,
+body {
+ height: 100%;
+}
+.App {
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+}
+.App .container {
+ flex: 1 0 auto;
+}
+
 img {
   width: 100%;
 }
@@ -37,3 +50,4 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
