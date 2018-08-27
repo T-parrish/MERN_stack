@@ -201,7 +201,7 @@ class EditProfile extends Component {
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="Yo screen name"
+                  info="Your screen name"
                 />
                 <SelectListGroup 
                   placeholder="Status"
@@ -210,7 +210,7 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   error={errors.status}
                   options={options}
-                  info="Yo status"
+                  info="Your professional status"
                 />
                 <TextFieldGroup 
                   placeholder="Company"
@@ -218,7 +218,7 @@ class EditProfile extends Component {
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
-                  info="yo biznezz"
+                  info="Your business"
                 />
                 <TextFieldGroup 
                   placeholder="Website"
@@ -226,7 +226,7 @@ class EditProfile extends Component {
                   value={this.state.website}
                   onChange={this.onChange}
                   error={errors.website}
-                  info="Yo website"
+                  info="Your website"
                 />
                 <TextFieldGroup 
                   placeholder="Location"
@@ -234,7 +234,7 @@ class EditProfile extends Component {
                   value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
-                  info="Yo location"
+                  info="Your location"
                 />
                 <TextFieldGroup 
                   placeholder="Skills"
@@ -242,7 +242,7 @@ class EditProfile extends Component {
                   value={this.state.skills}
                   onChange={this.onChange}
                   error={errors.skills}
-                  info="Yo skillz, please use comma separated values"
+                  info="Your technical skills"
                 />
                 <TextFieldGroup 
                   placeholder="Github Username"
@@ -250,7 +250,7 @@ class EditProfile extends Component {
                   value={this.state.githubusername}
                   onChange={this.onChange}
                   error={errors.githubusername}
-                  info="Yo github"
+                  info="Your github"
                 />
                 <TextAreaFieldGroup   
                   placeholder="Short Bio"
@@ -258,7 +258,7 @@ class EditProfile extends Component {
                   value={this.state.bio}
                   onChange={this.onChange}
                   error={errors.bio}
-                  info="Yo bio"
+                  info="Your short bio"
                 />
                 <div className="mb-3">
                   <button type='button' onClick={() => {
